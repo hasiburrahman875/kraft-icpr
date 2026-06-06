@@ -1,6 +1,6 @@
-# KRAfT ICPR Reproducibility Package
+# KRAfT ICPR 2026 Reproducibility Package
 
-Official reproducibility package for the ICPR 2026 accepted paper:
+This repository is the official reproducibility package for the ICPR 2026 accepted paper:
 
 ```text
 KRAfT: Kalman Residual Diffusion with Formation Awareness for UAV Swarm Tracking
@@ -10,60 +10,25 @@ Missouri University of Science and Technology
 Rolla, MO 65401, USA
 ```
 
-This repository contains the code and configuration files for reproducing the KRAfT tracking runs on:
+The repository contains the source code, configuration files, and evaluation runner. The large assets required for reproduction are hosted on Zenodo.
 
-- UAVSwarm
-- UAVSwarm-W2C
-- MUAV
+## Artifact Structure
 
-Large files are not stored in GitHub. Dataset files, detections, checkpoints, and optional checksum tracks are distributed separately through Zenodo.
-
-## Quick Start
-
-```bash
-git clone https://github.com/hasiburrahman875/kraft-icpr.git
-cd kraft-icpr
-
-# Download kraft-uavswarm-assets.tar.gz from Zenodo into the repository root.
-sha256sum -c kraft-uavswarm-assets.sha256
-tar -xzf kraft-uavswarm-assets.tar.gz
-
-conda activate kraft-icpr
-PYTHON=$(which python) ./run.sh all
-```
-
-The final summaries will be written to:
+The GitHub repository contains:
 
 ```text
-results/uavswarm/evaluation/summary.tsv
-results/uavswarm-w2c/evaluation/summary.tsv
-results/muav/evaluation/summary.tsv
+run.sh
+reproduce.py
+requirements.txt
+download_assets.sh
+config_uavswarm.yaml
+config_w2c.yaml
+config_muav.yaml
+config_muav_eval_tracks.yaml
+kraft/
 ```
 
-## Reproduction Steps
-
-### 1. Clone
-
-```bash
-git clone https://github.com/hasiburrahman875/kraft-icpr.git
-cd kraft-icpr
-```
-
-### 2. Download Assets
-
-Download the asset archive from the public Zenodo record:
-
-```text
-kraft-uavswarm-assets.tar.gz
-```
-
-Zenodo DOI:
-
-```text
-https://doi.org/10.5281/zenodo.20566871
-```
-
-The archive contains:
+The Zenodo archive provides:
 
 ```text
 dataset/
@@ -72,52 +37,90 @@ checkpoints/
 tracks/
 ```
 
-Place `kraft-uavswarm-assets.tar.gz` in the repository root, next to `run.sh`.
+After setup, the repository root should contain both groups of files.
 
-### 3. Verify and Extract
+## Requirements
 
-Verify the archive:
+- Linux environment
+- CUDA-capable GPU
+- Conda or another Python environment manager
+- Python 3.10 recommended
+- At least 50 GB of free disk space for the compressed archive and extracted assets
+
+The reproduction code expects precomputed detections and checkpoints from the Zenodo archive. Detector training and detector inference are not part of this artifact.
+
+## Step 1: Clone the Repository
 
 ```bash
-sha256sum -c kraft-uavswarm-assets.sha256
+git clone https://github.com/hasiburrahman875/kraft-icpr.git
+cd kraft-icpr
 ```
 
-Successful verification output:
+All commands below assume the current working directory is the repository root.
+
+## Step 2: Create the Environment
+
+```bash
+conda create -n kraft-icpr python=3.10 -y
+conda activate kraft-icpr
+pip install -r requirements.txt
+```
+
+If a compatible CUDA-enabled PyTorch environment already exists, it can be used instead. In that case, activate the environment and install the missing packages from `requirements.txt`.
+
+## Step 3: Download and Extract Assets
+
+Assets are available from Zenodo:
+
+```text
+https://doi.org/10.5281/zenodo.20566871
+```
+
+### Recommended Download
+
+Run the provided helper script from the repository root:
+
+```bash
+bash download_assets.sh
+```
+
+The script downloads:
+
+```text
+kraft-uavswarm-assets.tar.gz
+kraft-uavswarm-assets.sha256
+```
+
+It then verifies the SHA256 checksum and extracts the archive into the repository root.
+
+### Manual Download
+
+The files can also be downloaded manually:
+
+```bash
+curl -L -o kraft-uavswarm-assets.sha256 \
+  https://zenodo.org/api/records/20566871/files/kraft-uavswarm-assets.sha256/content
+
+curl -L -o kraft-uavswarm-assets.tar.gz \
+  https://zenodo.org/api/records/20566871/files/kraft-uavswarm-assets.tar.gz/content
+
+sha256sum -c kraft-uavswarm-assets.sha256
+tar -xzf kraft-uavswarm-assets.tar.gz
+```
+
+The checksum verification should report:
 
 ```text
 kraft-uavswarm-assets.tar.gz: OK
 ```
 
-Extract:
-
-```bash
-tar -xzf kraft-uavswarm-assets.tar.gz
-```
-
-After extraction, confirm the required asset folders exist:
+After extraction, verify the expected asset folders:
 
 ```bash
 ls dataset detections checkpoints tracks
 ```
 
-### 4. Install
-
-Use a CUDA-enabled Python environment. A suggested conda environment name is:
-
-```bash
-conda create -n kraft-icpr python=3.10 -y
-conda activate kraft-icpr
-```
-
-For a new environment, install the Python requirements:
-
-```bash
-pip install -r requirements.txt
-```
-
-Set `PYTHON` to the Python executable from the active environment.
-
-### 5. Run Reproduction
+## Step 4: Run the Reproduction
 
 Run all datasets:
 
@@ -125,7 +128,7 @@ Run all datasets:
 PYTHON=$(which python) ./run.sh all
 ```
 
-Run one dataset:
+Run individual datasets:
 
 ```bash
 PYTHON=$(which python) ./run.sh uavswarm
@@ -133,17 +136,17 @@ PYTHON=$(which python) ./run.sh w2c
 PYTHON=$(which python) ./run.sh muav
 ```
 
-Run the optional MUAV evaluator-only checksum:
+Optional evaluator-only MUAV checksum:
 
 ```bash
 PYTHON=$(which python) ./run.sh muav-eval
 ```
 
-`./run.sh muav` is the main MUAV reproduction command. It regenerates tracks from packaged detections and then evaluates them. `./run.sh muav-eval` only evaluates packaged MUAV track files and is intended as a quick evaluator check.
+The `muav` target regenerates tracks from packaged detections before evaluation. The `muav-eval` target evaluates packaged MUAV track files and is provided only as a faster evaluator check.
 
-### 6. Read Results
+## Step 5: Locate Outputs
 
-The runner creates intermediate files under:
+Intermediate tracking and evaluation files are written under:
 
 ```text
 outputs/uavswarm/
@@ -152,7 +155,7 @@ outputs/muav/
 outputs/muav-eval-tracks/
 ```
 
-Read the final summaries here:
+Final summary files are written under:
 
 ```text
 results/uavswarm/evaluation/summary.tsv
@@ -161,33 +164,18 @@ results/muav/evaluation/summary.tsv
 results/muav-eval-tracks/evaluation/summary.tsv
 ```
 
-## Repository Layout
+## Configuration Files
 
-Code and configs in GitHub:
+The reproduction runner uses one YAML configuration per benchmark group:
 
 ```text
-run.sh
-reproduce.py
-requirements.txt
 config_uavswarm.yaml
 config_w2c.yaml
 config_muav.yaml
 config_muav_eval_tracks.yaml
-kraft/
 ```
 
-Assets from Zenodo after extraction:
-
-```text
-dataset/
-detections/
-checkpoints/
-tracks/
-```
-
-## Checkpoint Paths
-
-The YAML configs use explicit checkpoint paths.
+UAVSwarm-W2C and MUAV use fold-specific checkpoint paths. The main checkpoint layout is:
 
 | Dataset/fold | KRAfT/DiffMOT checkpoint | ReID checkpoint |
 |---|---|---|
@@ -199,11 +187,9 @@ The YAML configs use explicit checkpoint paths.
 | MUAV fold2 | `checkpoints/muav/fold2/kraft_muav_fold2.pt` | `checkpoints/muav/fold2/reid_muav_fold2.pth` |
 | MUAV fold3 | `checkpoints/muav/fold3/kraft_muav_fold3.pt` | `checkpoints/muav/fold3/reid_muav_fold3.pth` |
 
-Some checkpoint files are byte-identical named copies of the same source weights. They are kept fold-specific so each config is self-contained.
+Some checkpoint files are byte-identical named copies of the same source weights. They are kept fold-specific so each configuration is self-contained.
 
-## Notes
-
-UAVSwarm settings are specified in `config_uavswarm.yaml`.
+## Implementation Notes
 
 UAVSwarm-W2C uses one configuration per fold in `config_w2c.yaml`.
 
@@ -215,7 +201,7 @@ For MUAV, the packaged fold folders do not include `seqinfo.ini`. The runner gen
 
 ## Troubleshooting
 
-If a run fails, first verify the asset folders and checksum:
+First verify that the assets were extracted correctly:
 
 ```bash
 ls dataset detections checkpoints tracks
@@ -230,10 +216,10 @@ outputs/<target>/logs/
 
 Issue reports should include:
 
-- the executed command
-- the target dataset: `uavswarm`, `w2c`, `muav`, or `muav-eval`
-- the relevant log file from `outputs/<target>/logs/`
-- the generated `results/<target>/evaluation/summary.tsv`, if it exists
+- executed command
+- target dataset: `uavswarm`, `w2c`, `muav`, or `muav-eval`
+- relevant log file from `outputs/<target>/logs/`
+- generated `results/<target>/evaluation/summary.tsv`, if available
 - Python, CUDA, PyTorch, and GPU details
 
 During anonymous review, use the official review discussion channel. For public code or asset issues, open a GitHub issue. After de-anonymization, contact the corresponding author listed in the paper.

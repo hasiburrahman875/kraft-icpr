@@ -10,35 +10,41 @@ Missouri University of Science and Technology
 Rolla, MO 65401, USA
 ```
 
+## Environment
+
 Create and activate a CUDA-enabled Python environment:
 
 ```bash
 conda create -n kraft-icpr python=3.10 -y
 conda activate kraft-icpr
-```
-
-Alternatively, install the Python dependencies into a CUDA-enabled PyTorch environment:
-
-```bash
 pip install -r requirements.txt
 ```
 
-The reproduction assets are distributed through Zenodo:
+## Assets
+
+The required datasets, detections, checkpoints, and optional checksum tracks are hosted on Zenodo:
 
 ```text
 https://doi.org/10.5281/zenodo.20566871
 ```
 
-After extraction, the asset package provides the required detector outputs, checkpoints, ReID weights, optional packaged MUAV checksum track files, and dataset folders used by the provided configs.
+From the repository root, download and extract the assets with:
+
+```bash
+bash download_assets.sh
+```
+
+Manual download commands are provided in `README.md`.
+
+## Execution
 
 Run all datasets:
 
 ```bash
-cd /cluster/pixstor/madrias-lab/Hasibur/AT/repro_outputs/kraft-uavswarm-repro
 PYTHON=$(which python) ./run.sh all
 ```
 
-Dataset-specific commands:
+Run individual datasets:
 
 ```bash
 PYTHON=$(which python) ./run.sh uavswarm
@@ -46,12 +52,18 @@ PYTHON=$(which python) ./run.sh w2c
 PYTHON=$(which python) ./run.sh muav
 ```
 
-For MUAV, `./run.sh muav` regenerates tracks from packaged detections before evaluation. The faster evaluator-only checksum is:
+Run the optional MUAV evaluator-only checksum:
 
 ```bash
 PYTHON=$(which python) ./run.sh muav-eval
 ```
 
+Final summaries are written under:
+
+```text
+results/<target>/evaluation/summary.tsv
+```
+
 ## Support
 
-Issue reports should include the command, dataset target, log files under `outputs/<target>/logs/`, and any generated `results/<target>/evaluation/summary.tsv`. During anonymous review, use the official review discussion channel. For public code or asset issues, open a GitHub issue in the repository. After de-anonymization, contact the corresponding author listed in the paper.
+Issue reports should include the executed command, dataset target, log files under `outputs/<target>/logs/`, and any generated `results/<target>/evaluation/summary.tsv`. During anonymous review, use the official review discussion channel. For public code or asset issues, open a GitHub issue in the repository. After de-anonymization, contact the corresponding author listed in the paper.
