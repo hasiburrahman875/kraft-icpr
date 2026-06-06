@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+outputs/
+results/
+generated_detections_*/
+
+# Large Zenodo assets. These are downloaded separately using the README instructions.
+/dataset/
+/detections/
+/checkpoints/
+/tracks/
+kraft-uavswarm-assets.tar.gz
+
+# Local Zenodo API draft metadata.
+.zenodo_deposition.json

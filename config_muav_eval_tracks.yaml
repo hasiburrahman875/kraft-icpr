@@ -1,0 +1,100 @@
+dataset_type: muav
+result_name: muav-eval-tracks
+tracker_impl: kraft
+run_mode: evaluate_tracks
+report_metrics:
+  - HOTA
+  - DetA
+  - AssA
+  - MOTA
+  - MOTP
+  - IDF1
+tracker_name: kraft-muav
+dataset_root: dataset/MUAV
+expected:
+  fold1:
+    HOTA: 68.718
+    DetA: 70.513
+    AssA: 67.431
+    MOTA: 84.583
+    MOTP: 79.244
+    IDF1: 83.228
+  fold2:
+    HOTA: 67.620
+    DetA: 64.859
+    AssA: 71.114
+    MOTA: 76.912
+    MOTP: 79.106
+    IDF1: 82.239
+  fold3:
+    HOTA: 66.954
+    DetA: 68.280
+    AssA: 66.418
+    MOTA: 79.917
+    MOTP: 78.695
+    IDF1: 79.084
+  overall:
+    HOTA: 67.764
+    DetA: 67.884
+    AssA: 68.321
+    MOTA: 80.471
+    MOTP: 79.015
+    IDF1: 81.517
+paper_target_overall:
+  HOTA: 65.31
+  DetA: 65.01
+  AssA: 66.53
+  MOTA: 77.07
+  IDF1: 79.92
+runtime:
+  eval_at: 2100
+  high_thres: 0.25
+  med_thres: 0.10
+  low_thres: 0.05
+  lambda_kf: 0.60
+  gamma: 0.50
+  anti_swap_gain: 0.45
+  anti_swap_angle_gain: 0.20
+  max_center_frac: 0.08
+  min_iou_gate: 0.05
+  w_assoc_emb: 1.0
+  aw_param: 1.0
+  preprocess_workers: 16
+  device: cuda
+folds:
+  fold1:
+    benchmark: MUAV-fold1
+    split: test
+    source: dataset/MUAV/fold1_mot/test
+    det_dir: detections/muav/yolov12fold1
+    track_dir: tracks/muav/fold1
+    runtime:
+      checkpoint_path: checkpoints/muav/fold1/kraft_muav_fold1.pt
+      reid_weights: checkpoints/muav/fold1/reid_muav_fold1.pth
+    min_output_track_length: 1
+    link:
+      enabled: false
+  fold2:
+    benchmark: MUAV-fold2
+    split: test
+    source: dataset/MUAV/fold2_mot/test
+    det_dir: detections/muav/yolov12fold2
+    track_dir: tracks/muav/fold2
+    runtime:
+      checkpoint_path: checkpoints/muav/fold2/kraft_muav_fold2.pt
+      reid_weights: checkpoints/muav/fold2/reid_muav_fold2.pth
+    min_output_track_length: 1
+    link:
+      enabled: false
+  fold3:
+    benchmark: MUAV-fold3
+    split: test
+    source: dataset/MUAV/fold3_mot/test
+    det_dir: detections/muav/yolov12fold3
+    track_dir: tracks/muav/fold3
+    runtime:
+      checkpoint_path: checkpoints/muav/fold3/kraft_muav_fold3.pt
+      reid_weights: checkpoints/muav/fold3/reid_muav_fold3.pth
+    min_output_track_length: 1
+    link:
+      enabled: false

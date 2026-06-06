@@ -1,0 +1,76 @@
+dataset_type: uavswarm
+result_name: uavswarm
+tracker_impl: kraft
+benchmark: UAVSwarm
+split: test
+dataset_root: dataset/UAVSwarm
+checkpoint_path: checkpoints/uavswarm/kraft_uavswarm.pt
+reid_weights: checkpoints/uavswarm/reid_uavswarm.pth
+report_metrics:
+  - HOTA
+  - DetA
+  - AssA
+  - MOTA
+  - IDF1
+tracker_name: kraft-uavswarm-linked
+
+expected:
+  HOTA: 80.919
+  DetA: 79.324
+  AssA: 83.361
+  MOTA: 94.787
+  IDF1: 94.846
+
+default_setting: setting_a
+
+settings:
+  setting_a:
+    det_dir: detections/uavswarm/yolov12detv6/0.45
+    high_thres: 0.52
+    med_thres: 0.28
+    low_thres: 0.05
+    w_assoc_emb: 2.2
+    aw_param: 1.7
+    lambda_kf: 0.50
+    gamma: 0.50
+    anti_swap_gain: 0.12
+    anti_swap_angle_gain: 0.10
+    max_center_frac: 0.06
+    min_iou_gate: 0.10
+  setting_b:
+    det_dir: detections/uavswarm/yolov12detv6/0.45
+    high_thres: 0.45
+    med_thres: 0.20
+    low_thres: 0.05
+    w_assoc_emb: 2.2
+    aw_param: 1.7
+    lambda_kf: 0.60
+    gamma: 0.50
+    anti_swap_gain: 0.12
+    anti_swap_angle_gain: 0.10
+    max_center_frac: 0.06
+    min_iou_gate: 0.10
+
+setting_sequences:
+  setting_b:
+    - UAVSwarm-04
+    - UAVSwarm-20
+    - UAVSwarm-26
+    - UAVSwarm-30
+    - UAVSwarm-38
+    - UAVSwarm-46
+    - UAVSwarm-52
+    - UAVSwarm-60
+    - UAVSwarm-64
+    - UAVSwarm-68
+    - UAVSwarm-70
+
+empty_sequences:
+  - UAVSwarm-18
+
+tracklet_linking:
+  enabled: true
+  max_gap: 2
+  max_center_frac: 0.02
+  max_size_log: 0.40
+  min_track_length: 1

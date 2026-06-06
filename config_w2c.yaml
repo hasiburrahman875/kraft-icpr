@@ -1,0 +1,178 @@
+dataset_type: uavswarm-w2c
+result_name: uavswarm-w2c
+tracker_impl: diffmot
+report_metrics:
+  - HOTA
+  - DetA
+  - AssA
+  - MOTA
+  - MOTP
+  - IDF1
+tracker_name: kraft-uavswarm-w2c
+dataset_root: dataset/UAVSwarm-W2C
+expected:
+  fold1:
+    HOTA: 69.014
+    DetA: 69.177
+    AssA: 69.115
+    MOTA: 87.22
+    MOTP: 79.202
+    IDSW: 226
+    IDF1: 87.334
+  fold2:
+    HOTA: 72.124
+    DetA: 69.601
+    AssA: 75.103
+    MOTA: 86.84
+    MOTP: 79.985
+    IDSW: 49
+    IDF1: 90.021
+  fold3:
+    HOTA: 72.686
+    DetA: 72.666
+    AssA: 73.007
+    MOTA: 88.722
+    MOTP: 81.97
+    IDSW: 115
+    IDF1: 87.866
+runtime:
+  eval_at: 7822
+  high_thres: 0.25
+  low_thres: 0.1
+  w_assoc_emb: 2.2
+  aw_param: 1.7
+  preprocess_workers: 16
+  device: cuda
+folds:
+  fold1:
+    benchmark: fold1
+    split: test
+    det_dir: detections/uavswarm-w2c/yolov12fold1
+    link:
+      enabled: true
+      max_gap: 15
+      max_center_frac: 0.1
+      max_size_log: 0.4
+      min_track_length: 1
+    sequences:
+    - Swarm-83
+    - Swarm-61
+    - Swarm-95
+    - Swarm-21
+    - Swarm-36
+    - Swarm-77
+    - Swarm-60
+    - Swarm-56
+    - Swarm-92
+    - Swarm-64
+    - Swarm-99
+    - Swarm-76
+    - Swarm-35
+    - Swarm-74
+    - Swarm-90
+    - Swarm-41
+    - Swarm-54
+    - Swarm-93
+    - Swarm-89
+    - Swarm-75
+    - Swarm-103
+    - Swarm-30
+    - Swarm-105
+    - Swarm-34
+    - Swarm-33
+    - Swarm-100
+    - Swarm-22
+    runtime:
+      checkpoint_path: checkpoints/uavswarm-w2c/fold1/kraft_uavswarm_w2c_fold1.pt
+      reid_weights: checkpoints/uavswarm-w2c/fold1/reid_uavswarm_w2c_fold1.pth
+      high_thres: 0.4
+      low_thres: 0.1
+    min_output_track_length: 3
+  fold2:
+    benchmark: fold2
+    split: test
+    seqmap_header: false
+    det_dir: detections/uavswarm-w2c/yolov12fold2
+    link:
+      enabled: true
+      max_gap: 5
+      max_center_frac: 0.01
+      max_size_log: 0.4
+      min_track_length: 1
+    sequences:
+    - Swarm-82
+    - Swarm-39
+    - Swarm-25
+    - Swarm-97
+    - Swarm-109
+    - Swarm-70
+    - Swarm-57
+    - Swarm-40
+    - Swarm-68
+    - Swarm-24
+    - Swarm-63
+    - Swarm-102
+    - Swarm-53
+    - Swarm-107
+    - Swarm-65
+    - Swarm-85
+    - Swarm-94
+    - Swarm-104
+    - Swarm-101
+    - Swarm-66
+    - Swarm-67
+    - Swarm-52
+    - Swarm-108
+    - Swarm-88
+    - Swarm-28
+    - Swarm-110
+    runtime:
+      checkpoint_path: checkpoints/uavswarm-w2c/fold2/kraft_uavswarm_w2c_fold2.pt
+      reid_weights: checkpoints/uavswarm-w2c/fold2/reid_uavswarm_w2c_fold2.pth
+      high_thres: 0.25
+      low_thres: 0.1
+    min_output_track_length: 10
+  fold3:
+    benchmark: fold3
+    split: test
+    det_dir: detections/uavswarm-w2c/yolov12fold3
+    link:
+      enabled: true
+      max_gap: 15
+      max_center_frac: 0.1
+      max_size_log: 0.4
+      min_track_length: 1
+    sequences:
+    - Swarm-59
+    - Swarm-23
+    - Swarm-51
+    - Swarm-71
+    - Swarm-84
+    - Swarm-81
+    - Swarm-86
+    - Swarm-27
+    - Swarm-96
+    - Swarm-58
+    - Swarm-31
+    - Swarm-26
+    - Swarm-29
+    - Swarm-78
+    - Swarm-38
+    - Swarm-80
+    - Swarm-98
+    - Swarm-37
+    - Swarm-72
+    - Swarm-79
+    - Swarm-106
+    - Swarm-55
+    - Swarm-91
+    - Swarm-69
+    - Swarm-87
+    - Swarm-62
+    - Swarm-32
+    runtime:
+      checkpoint_path: checkpoints/uavswarm-w2c/fold3/kraft_uavswarm_w2c_fold3.pt
+      reid_weights: checkpoints/uavswarm-w2c/fold3/reid_uavswarm_w2c_fold3.pth
+      high_thres: 0.45
+      low_thres: 0.1
+    min_output_track_length: 3
