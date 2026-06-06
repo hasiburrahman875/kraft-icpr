@@ -1,4 +1,4 @@
-# KRAfT ICPR Reproduction
+# KRAfT ICPR Reproducibility Package
 
 This repository contains the code and configuration files needed to reproduce the KRAfT tracking runs for:
 
@@ -14,7 +14,7 @@ Large files are not stored in GitHub. Dataset files, detections, checkpoints, an
 git clone https://github.com/hasiburrahman875/kraft-icpr.git
 cd kraft-icpr
 
-# Download kraft-uavswarm-assets.tar.gz from Zenodo and place it here.
+# Download kraft-uavswarm-assets.tar.gz from Zenodo into the repository root.
 sha256sum -c kraft-uavswarm-assets.sha256
 tar -xzf kraft-uavswarm-assets.tar.gz
 
@@ -45,13 +45,13 @@ Download the asset archive from Zenodo:
 kraft-uavswarm-assets.tar.gz
 ```
 
-Zenodo record:
+Zenodo DOI:
 
 ```text
-10.5281/zenodo.20566871
+https://doi.org/10.5281/zenodo.20566871
 ```
 
-If the Zenodo record is still a private draft, use the private preview/download link provided by the authors.
+If the Zenodo record is still a private draft, access requires the private preview/download link provided by the authors.
 
 The archive contains:
 
@@ -98,7 +98,7 @@ Use a CUDA-enabled Python environment. The original experiments used:
 conda activate yolov12_botsort
 ```
 
-If creating a new environment, install the Python requirements:
+For a new environment, install the Python requirements:
 
 ```bash
 pip install -r requirements.txt
@@ -110,7 +110,7 @@ The tested cluster Python path was:
 /home/mrpk9/.conda/envs/yolov12_botsort/bin/python
 ```
 
-On another machine, use the Python executable from your own environment.
+For non-cluster systems, set `PYTHON` to the Python executable from the active environment.
 
 ## 5. Run Reproduction
 
@@ -210,7 +210,7 @@ For MUAV, the packaged fold folders do not include `seqinfo.ini`. The runner gen
 
 ## Troubleshooting
 
-If a run fails, first check:
+If a run fails, first verify the asset folders and checksum:
 
 ```bash
 ls dataset detections checkpoints tracks
@@ -223,9 +223,9 @@ Then inspect the relevant log directory:
 outputs/<target>/logs/
 ```
 
-When reporting an issue, include:
+Issue reports should include:
 
-- the command you ran
+- the executed command
 - the target dataset: `uavswarm`, `w2c`, `muav`, or `muav-eval`
 - the relevant log file from `outputs/<target>/logs/`
 - the generated `results/<target>/evaluation/summary.tsv`, if it exists
