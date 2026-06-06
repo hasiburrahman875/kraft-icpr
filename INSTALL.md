@@ -1,5 +1,15 @@
 # Installation
 
+This repository is the reproducibility package for the ICPR 2026 accepted paper:
+
+```text
+KRAfT: Kalman Residual Diffusion with Formation Awareness for UAV Swarm Tracking
+Md. Hasibur Rahman and Sanjay Madria
+Department of Computer Science
+Missouri University of Science and Technology
+Rolla, MO 65401, USA
+```
+
 Use the existing conda environment if available:
 
 ```bash

@@ -1,6 +1,16 @@
 # KRAfT ICPR Reproducibility Package
 
-This repository contains the code and configuration files needed to reproduce the KRAfT tracking runs for:
+Official reproducibility package for the ICPR 2026 accepted paper:
+
+```text
+KRAfT: Kalman Residual Diffusion with Formation Awareness for UAV Swarm Tracking
+Md. Hasibur Rahman and Sanjay Madria
+Department of Computer Science
+Missouri University of Science and Technology
+Rolla, MO 65401, USA
+```
+
+This repository contains the code and configuration files for reproducing the KRAfT tracking runs on:
 
 - UAVSwarm
 - UAVSwarm-W2C
@@ -30,14 +40,16 @@ results/uavswarm-w2c/evaluation/summary.tsv
 results/muav/evaluation/summary.tsv
 ```
 
-## 1. Clone
+## Reproduction Steps
+
+### 1. Clone
 
 ```bash
 git clone https://github.com/hasiburrahman875/kraft-icpr.git
 cd kraft-icpr
 ```
 
-## 2. Download Assets
+### 2. Download Assets
 
 Download the asset archive from Zenodo:
 
@@ -64,7 +76,7 @@ tracks/
 
 Place `kraft-uavswarm-assets.tar.gz` in the repository root, next to `run.sh`.
 
-## 3. Verify and Extract
+### 3. Verify and Extract
 
 Verify the archive:
 
@@ -90,7 +102,7 @@ After extraction, confirm the required asset folders exist:
 ls dataset detections checkpoints tracks
 ```
 
-## 4. Install
+### 4. Install
 
 Use a CUDA-enabled Python environment. The original experiments used:
 
@@ -112,7 +124,7 @@ The tested cluster Python path was:
 
 For non-cluster systems, set `PYTHON` to the Python executable from the active environment.
 
-## 5. Run Reproduction
+### 5. Run Reproduction
 
 Run all datasets:
 
@@ -136,7 +148,7 @@ PYTHON=$(which python) ./run.sh muav-eval
 
 `./run.sh muav` is the main MUAV reproduction command. It regenerates tracks from packaged detections and then evaluates them. `./run.sh muav-eval` only evaluates packaged MUAV track files and is intended as a quick evaluator check.
 
-## 6. Read Results
+### 6. Read Results
 
 The runner creates intermediate files under:
 
@@ -198,7 +210,7 @@ Some checkpoint files are byte-identical named copies of the same source weights
 
 ## Notes
 
-UAVSwarm uses the non-oracle settings in `config_uavswarm.yaml`.
+UAVSwarm settings are specified in `config_uavswarm.yaml`.
 
 UAVSwarm-W2C uses one configuration per fold in `config_w2c.yaml`.
 
