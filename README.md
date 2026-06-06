@@ -28,7 +28,7 @@ cd kraft-icpr
 sha256sum -c kraft-uavswarm-assets.sha256
 tar -xzf kraft-uavswarm-assets.tar.gz
 
-conda activate yolov12_botsort
+conda activate kraft-icpr
 PYTHON=$(which python) ./run.sh all
 ```
 
@@ -102,10 +102,11 @@ ls dataset detections checkpoints tracks
 
 ### 4. Install
 
-Use a CUDA-enabled Python environment. The original experiments used:
+Use a CUDA-enabled Python environment. A suggested conda environment name is:
 
 ```bash
-conda activate yolov12_botsort
+conda create -n kraft-icpr python=3.10 -y
+conda activate kraft-icpr
 ```
 
 For a new environment, install the Python requirements:
@@ -114,13 +115,7 @@ For a new environment, install the Python requirements:
 pip install -r requirements.txt
 ```
 
-The tested cluster Python path was:
-
-```text
-/home/mrpk9/.conda/envs/yolov12_botsort/bin/python
-```
-
-For non-cluster systems, set `PYTHON` to the Python executable from the active environment.
+Set `PYTHON` to the Python executable from the active environment.
 
 ### 5. Run Reproduction
 

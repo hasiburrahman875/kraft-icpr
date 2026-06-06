@@ -10,10 +10,11 @@ Missouri University of Science and Technology
 Rolla, MO 65401, USA
 ```
 
-Use the existing conda environment if available:
+Create and activate a CUDA-enabled Python environment:
 
 ```bash
-conda activate yolov12_botsort
+conda create -n kraft-icpr python=3.10 -y
+conda activate kraft-icpr
 ```
 
 Alternatively, install the Python dependencies into a CUDA-enabled PyTorch environment:
@@ -34,21 +35,21 @@ Run all datasets:
 
 ```bash
 cd /cluster/pixstor/madrias-lab/Hasibur/AT/repro_outputs/kraft-uavswarm-repro
-PYTHON=/home/mrpk9/.conda/envs/yolov12_botsort/bin/python ./run.sh all
+PYTHON=$(which python) ./run.sh all
 ```
 
 Dataset-specific commands:
 
 ```bash
-PYTHON=/home/mrpk9/.conda/envs/yolov12_botsort/bin/python ./run.sh uavswarm
-PYTHON=/home/mrpk9/.conda/envs/yolov12_botsort/bin/python ./run.sh w2c
-PYTHON=/home/mrpk9/.conda/envs/yolov12_botsort/bin/python ./run.sh muav
+PYTHON=$(which python) ./run.sh uavswarm
+PYTHON=$(which python) ./run.sh w2c
+PYTHON=$(which python) ./run.sh muav
 ```
 
 For MUAV, `./run.sh muav` regenerates tracks from packaged detections before evaluation. The faster evaluator-only checksum is:
 
 ```bash
-PYTHON=/home/mrpk9/.conda/envs/yolov12_botsort/bin/python ./run.sh muav-eval
+PYTHON=$(which python) ./run.sh muav-eval
 ```
 
 ## Support
