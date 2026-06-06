@@ -195,13 +195,11 @@ UAVSwarm-W2C uses one configuration per fold in `config_w2c.yaml`.
 
 MUAV uses one configuration per fold in `config_muav.yaml`. The default MUAV config sets `w_assoc_emb: 0.0`, so ReID embeddings are not used in the main MUAV tracking run, although fold-wise ReID files are included for completeness.
 
-For W2C, `fold1/Swarm-77` declares `seqLength=812` but contains 811 JPG images in the packaged dataset. The runner uses all available images and caps MOT GT/detection files to the valid sequence length before TrackEval.
-
-For MUAV, the packaged fold folders do not include `seqinfo.ini`. The runner generates minimal MOT `seqinfo.ini` files from the packaged images and caps GT rows to the available image count before TrackEval.
+For MUAV, the packaged fold folders do not include `seqinfo.ini`. Minimal MOT `seqinfo.ini` files from the packaged images and caps GT rows to the available image count before TrackEval.
 
 ## Troubleshooting
 
-First verify that the assets were extracted correctly:
+First, verify that the assets were extracted correctly:
 
 ```bash
 ls dataset detections checkpoints tracks
