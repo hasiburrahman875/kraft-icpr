@@ -51,7 +51,7 @@ cd kraft-icpr
 
 ### 2. Download Assets
 
-Download the asset archive from Zenodo:
+Download the asset archive from the public Zenodo record:
 
 ```text
 kraft-uavswarm-assets.tar.gz
@@ -62,8 +62,6 @@ Zenodo DOI:
 ```text
 https://doi.org/10.5281/zenodo.20566871
 ```
-
-If the Zenodo record is still a private draft, access requires the private preview/download link provided by the authors.
 
 The archive contains:
 
