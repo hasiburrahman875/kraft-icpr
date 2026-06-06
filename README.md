@@ -156,42 +156,6 @@ results/muav/evaluation/summary.tsv
 results/muav-eval-tracks/evaluation/summary.tsv
 ```
 
-## Expected Results
-
-### UAVSwarm
-
-| group | HOTA | DetA | AssA | MOTA | IDF1 |
-|---|---:|---:|---:|---:|---:|
-| test | 80.919 | 79.324 | 83.361 | 94.787 | 94.846 |
-
-### UAVSwarm-W2C
-
-| group | HOTA | DetA | AssA | MOTA | MOTP | IDF1 |
-|---|---:|---:|---:|---:|---:|---:|
-| fold1 | 69.014 | 69.177 | 69.115 | 87.220 | 79.202 | 87.334 |
-| fold2 | 72.124 | 69.601 | 75.103 | 86.840 | 79.985 | 90.021 |
-| fold3 | 72.686 | 72.666 | 73.007 | 88.722 | 81.970 | 87.866 |
-| overall | 71.275 | 70.481 | 72.408 | 87.594 | 80.386 | 88.407 |
-
-`overall` is a macro-average over the three folds. `IDSW` is not reported in the clean summary.
-
-### MUAV Fast Checksum
-
-The following table is reproduced by:
-
-```bash
-PYTHON=/home/mrpk9/.conda/envs/yolov12_botsort/bin/python ./run.sh muav-eval
-```
-
-| group | HOTA | DetA | AssA | MOTA | MOTP | IDF1 |
-|---|---:|---:|---:|---:|---:|---:|
-| fold1 | 68.718 | 70.513 | 67.431 | 84.583 | 79.244 | 83.228 |
-| fold2 | 67.620 | 64.859 | 71.114 | 76.912 | 79.106 | 82.239 |
-| fold3 | 66.954 | 68.280 | 66.418 | 79.917 | 78.695 | 79.084 |
-| overall | 67.764 | 67.884 | 68.321 | 80.471 | 79.015 | 81.517 |
-
-This exceeds the reported MUAV overall target of 65.31 HOTA, 65.01 DetA, 66.53 AssA, 77.07 MOTA, and 79.92 IDF1.
-
 ## Config Notes
 
 UAVSwarm uses the two documented non-oracle settings in `config_uavswarm.yaml`.
