@@ -144,6 +144,19 @@ PYTHON=$(which python) ./run.sh muav-eval
 
 The `muav` target regenerates tracks from packaged detections before evaluation. The `muav-eval` target evaluates packaged MUAV track files and is provided only as a faster evaluator check.
 
+### MUAV Output Modes
+
+The two MUAV commands produce different summary folders:
+
+```text
+results/muav/evaluation/summary.tsv
+results/muav-eval-tracks/evaluation/summary.tsv
+```
+
+`results/muav/evaluation/summary.tsv` is produced by `./run.sh muav`. This is the main MUAV reproduction result because it runs the tracker from packaged detections and then evaluates the generated tracks.
+
+`results/muav-eval-tracks/evaluation/summary.tsv` is produced by `./run.sh muav-eval`. This is an evaluator-only checksum that evaluates packaged track files. It is included to quickly verify the evaluation setup and is not the main MUAV reproduction path.
+
 ## Step 5: Locate Outputs
 
 Intermediate tracking and evaluation files are written under:
