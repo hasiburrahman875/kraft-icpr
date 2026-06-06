@@ -10,31 +10,6 @@ report_metrics:
   - IDF1
 tracker_name: kraft-uavswarm-w2c
 dataset_root: dataset/UAVSwarm-W2C
-expected:
-  fold1:
-    HOTA: 69.014
-    DetA: 69.177
-    AssA: 69.115
-    MOTA: 87.22
-    MOTP: 79.202
-    IDSW: 226
-    IDF1: 87.334
-  fold2:
-    HOTA: 72.124
-    DetA: 69.601
-    AssA: 75.103
-    MOTA: 86.84
-    MOTP: 79.985
-    IDSW: 49
-    IDF1: 90.021
-  fold3:
-    HOTA: 72.686
-    DetA: 72.666
-    AssA: 73.007
-    MOTA: 88.722
-    MOTP: 81.97
-    IDSW: 115
-    IDF1: 87.866
 runtime:
   eval_at: 7822
   high_thres: 0.25

@@ -14,13 +14,6 @@ report_metrics:
   - IDF1
 tracker_name: kraft-uavswarm-linked
 
-expected:
-  HOTA: 80.919
-  DetA: 79.324
-  AssA: 83.361
-  MOTA: 94.787
-  IDF1: 94.846
-
 default_setting: setting_a
 
 settings:

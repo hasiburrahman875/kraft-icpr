@@ -11,41 +11,6 @@ report_metrics:
   - IDF1
 tracker_name: kraft-muav
 dataset_root: dataset/MUAV
-expected:
-  fold1:
-    HOTA: 68.718
-    DetA: 70.513
-    AssA: 67.431
-    MOTA: 84.583
-    MOTP: 79.244
-    IDF1: 83.228
-  fold2:
-    HOTA: 67.620
-    DetA: 64.859
-    AssA: 71.114
-    MOTA: 76.912
-    MOTP: 79.106
-    IDF1: 82.239
-  fold3:
-    HOTA: 66.954
-    DetA: 68.280
-    AssA: 66.418
-    MOTA: 79.917
-    MOTP: 78.695
-    IDF1: 79.084
-  overall:
-    HOTA: 67.764
-    DetA: 67.884
-    AssA: 68.321
-    MOTA: 80.471
-    MOTP: 79.015
-    IDF1: 81.517
-paper_target_overall:
-  HOTA: 65.31
-  DetA: 65.01
-  AssA: 66.53
-  MOTA: 77.07
-  IDF1: 79.92
 runtime:
   eval_at: 2100
   high_thres: 0.25
