@@ -1,23 +1,29 @@
 dataset_type: muav
-result_name: muav
-tracker_impl: diffmot
+result_name: muav-kraft-regenerated
+tracker_impl: kraft
 run_mode: track
 report_metrics:
-  - HOTA
-  - DetA
-  - AssA
-  - MOTA
-  - MOTP
-  - IDF1
-tracker_name: kraft-muav
+- HOTA
+- DetA
+- AssA
+- MOTA
+- MOTP
+- IDF1
+tracker_name: kraft-muav-regenerated
 dataset_root: dataset/MUAV
 runtime:
-  eval_at: 286
+  eval_at: 2100
   high_thres: 0.25
-  med_thres: 0.10
-  low_thres: 0.10
-  w_assoc_emb: 0.0
-  aw_param: 1.7
+  med_thres: 0.1
+  low_thres: 0.05
+  lambda_kf: 0.6
+  gamma: 0.5
+  anti_swap_gain: 0.45
+  anti_swap_angle_gain: 0.2
+  max_center_frac: 0.08
+  min_iou_gate: 0.05
+  w_assoc_emb: 1.0
+  aw_param: 1.0
   preprocess_workers: 16
   device: cuda
 folds:
@@ -25,7 +31,7 @@ folds:
     benchmark: MUAV-fold1
     split: test
     source: dataset/MUAV/fold1_mot/test
-    det_dir: detections/muav-diffmot/fold1
+    det_dir: detections/muav/yolov12fold1
     runtime:
       checkpoint_path: checkpoints/muav/fold1/kraft_muav_fold1.pt
       reid_weights: checkpoints/muav/fold1/reid_muav_fold1.pth
@@ -36,7 +42,7 @@ folds:
     benchmark: MUAV-fold2
     split: test
     source: dataset/MUAV/fold2_mot/test
-    det_dir: detections/muav-diffmot/fold2
+    det_dir: detections/muav/yolov12fold2
     runtime:
       checkpoint_path: checkpoints/muav/fold2/kraft_muav_fold2.pt
       reid_weights: checkpoints/muav/fold2/reid_muav_fold2.pth
@@ -47,7 +53,7 @@ folds:
     benchmark: MUAV-fold3
     split: test
     source: dataset/MUAV/fold3_mot/test
-    det_dir: detections/muav-diffmot/fold3
+    det_dir: detections/muav/yolov12fold3
     runtime:
       checkpoint_path: checkpoints/muav/fold3/kraft_muav_fold3.pt
       reid_weights: checkpoints/muav/fold3/reid_muav_fold3.pth
