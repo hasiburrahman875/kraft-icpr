@@ -11,6 +11,12 @@ report_metrics:
 - IDF1
 tracker_name: kraft-muav-regenerated
 dataset_root: dataset/MUAV
+paper_target_overall:
+  HOTA: 65.31
+  DetA: 65.01
+  AssA: 66.53
+  MOTA: 77.07
+  IDF1: 79.92
 runtime:
   eval_at: 2100
   high_thres: 0.25
